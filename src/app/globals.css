@@ -12,3 +12,5 @@ th, td { border: 1px solid #ddd; padding: 6px 8px; text-align: left; font-size: 
 .ok { background: #e6f6ea; border: 1px solid #9ccfa8; padding: 8px 10px; margin: 12px 0; }
 .sel { background: #fff7d6; }
 .muted { color: #888; }
+input[type="date"], select, label { cursor: pointer; }
+input[type="date"]::-webkit-calendar-picker-indicator { cursor: pointer; }

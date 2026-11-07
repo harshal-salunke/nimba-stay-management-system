@@ -89,6 +89,7 @@ export function createBooking(input: BookingInput): Booking {
 export function listBookings() {
   const db = readDb();
   return db.bookings
+    .filter((b) => b.status !== "cancelled") // cancelled bookings are hidden from the desk list
     .map((b) => ({ ...b, roomNumber: db.rooms.find((r) => r.id === b.roomId)?.number ?? "?" }))
     .sort((a, b) => (a.checkIn < b.checkIn ? -1 : a.checkIn > b.checkIn ? 1 : 0));
 }

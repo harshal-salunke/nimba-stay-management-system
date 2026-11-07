@@ -63,6 +63,13 @@ export default function Page() {
     } finally { setBusy(false); }
   }
 
+  function reset() {
+    setCheckIn(""); setCheckOut(""); setCategory("");
+    setRooms(null); setSearched(null); setSelected(null);
+    setGuestName(""); setPhone("");
+    setError(""); setSuccess("");
+  }
+
   async function book() {
     if (!selected || !searched) return;
     setError(""); setSuccess("");
@@ -126,6 +133,7 @@ export default function Page() {
           </select>
         </label>
         <button onClick={() => search()} disabled={busy}>Search</button>
+        <button onClick={reset} disabled={busy}>Reset</button>
       </div>
 
       {error && <div className="err" role="alert">{error}</div>}
@@ -178,11 +186,11 @@ export default function Page() {
           <thead><tr><th>Room</th><th>Guest</th><th>Phone</th><th>Check-in</th><th>Check-out</th><th>Total</th><th>Status</th><th></th></tr></thead>
           <tbody>
             {bookings.map((b) => (
-              <tr key={b.id} className={b.status === "cancelled" ? "muted" : ""}>
+              <tr key={b.id}>
                 <td>{b.roomNumber}</td><td>{b.guestName}</td><td>{b.phone}</td>
                 <td>{b.checkIn}</td><td>{b.checkOut}</td><td>{inr(b.totalPrice)}</td>
                 <td>{b.status}</td>
-                <td>{b.status === "confirmed" && <button onClick={() => cancel(b.id)}>Cancel</button>}</td>
+                <td><button onClick={() => cancel(b.id)}>Cancel</button></td>
               </tr>
             ))}
           </tbody>

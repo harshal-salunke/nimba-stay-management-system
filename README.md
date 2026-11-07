@@ -23,7 +23,7 @@ Data lives in `data/db.json`. It is created automatically on first run with 8 se
 |---|---|
 | `GET /api/availability?checkIn=&checkOut=&category=` | Free rooms for the whole stay, with `nights` and `totalPrice`. `category` is optional (Standard / Deluxe / Suite). |
 | `POST /api/bookings` | Body: `{roomId, guestName, phone, checkIn, checkOut}`. `201` on success. |
-| `GET /api/bookings` | All bookings (added, see below). |
+| `GET /api/bookings` | Active (non-cancelled) bookings (added, see below). |
 | `PATCH /api/bookings/:id` | Cancels a booking (added, see below). |
 
 Errors are `{ "error": "message" }`:
@@ -45,11 +45,12 @@ Errors are `{ "error": "message" }`:
 
 ## What I added (and why)
 
-1. **Bookings list + Cancel button** (`GET /api/bookings`, `PATCH /api/bookings/:id`). The brief has a rule
+1. **Bookings list + Cancel button** (cancelled bookings disappear from the list; they stay in the data file) (`GET /api/bookings`, `PATCH /api/bookings/:id`). The brief has a rule
    about cancelled bookings, but no way to cancel one. Front desk needs it when a guest changes plans.
 2. **Required guest name** (400 if empty). A booking without a name is useless at the desk.
 3. **Auto-refresh after a 409** so staff immediately see which rooms are really free.
-4. **Date pickers can't select past days** (UI only; the API does not reject past dates, so back-entering is still possible via API).
+4. **Reset button** next to Search clears dates, category, results and messages.
+5. **Date pickers can't select past days** (UI only; the API does not reject past dates, so back-entering is still possible via API).
 
 ## What works / what doesn't
 
