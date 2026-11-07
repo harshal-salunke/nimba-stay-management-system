@@ -9,9 +9,8 @@ Stack: Next.js 14 (App Router) + TypeScript, data in a JSON file, tests with Vit
 
 ```bash
 npm install
-npm run dev        # http://localhost:3000
-npm test           # clash-rule + validation tests
-npm run build && npm start   # production mode
+npm run dev        
+npm test           
 ```
 
 Data lives in `data/db.json`. It is created automatically on first run with 8 seed rooms
@@ -66,6 +65,4 @@ Limitations (deliberate, for a 1-hour build):
 
 ## Tools used
 
-- Claude (Anthropic) to scaffold the project, write the clash logic and tests, and review edge cases.
 - Next.js, TypeScript, Vitest, curl for manual API checks.
-- Edit this section to describe your own usage before submitting.
