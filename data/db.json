@@ -1,0 +1,110 @@
+{
+  "rooms": [
+    {
+      "id": "r101",
+      "number": "101",
+      "category": "Standard",
+      "pricePerNight": 2500,
+      "status": "available"
+    },
+    {
+      "id": "r102",
+      "number": "102",
+      "category": "Standard",
+      "pricePerNight": 2500,
+      "status": "available"
+    },
+    {
+      "id": "r103",
+      "number": "103",
+      "category": "Standard",
+      "pricePerNight": 2500,
+      "status": "maintenance"
+    },
+    {
+      "id": "r201",
+      "number": "201",
+      "category": "Deluxe",
+      "pricePerNight": 4000,
+      "status": "available"
+    },
+    {
+      "id": "r202",
+      "number": "202",
+      "category": "Deluxe",
+      "pricePerNight": 4000,
+      "status": "available"
+    },
+    {
+      "id": "r203",
+      "number": "203",
+      "category": "Deluxe",
+      "pricePerNight": 4200,
+      "status": "available"
+    },
+    {
+      "id": "r301",
+      "number": "301",
+      "category": "Suite",
+      "pricePerNight": 6500,
+      "status": "available"
+    },
+    {
+      "id": "r302",
+      "number": "302",
+      "category": "Suite",
+      "pricePerNight": 7000,
+      "status": "available"
+    }
+  ],
+  "bookings": [
+    {
+      "id": "c14011f1-ee7d-41de-a547-dfbb61df389c",
+      "roomId": "r101",
+      "guestName": "sad2312424sadasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasd",
+      "phone": "2423233423",
+      "checkIn": "2026-11-09",
+      "checkOut": "2026-11-10",
+      "nights": 1,
+      "totalPrice": 2500,
+      "status": "cancelled",
+      "createdAt": "2026-11-07T11:49:33.218Z"
+    },
+    {
+      "id": "c5beca2f-d27a-469b-b9d9-16dae8ddc1bd",
+      "roomId": "r202",
+      "guestName": "asdase12121",
+      "phone": "5654651654",
+      "checkIn": "2026-11-09",
+      "checkOut": "2026-11-10",
+      "nights": 1,
+      "totalPrice": 4000,
+      "status": "cancelled",
+      "createdAt": "2026-11-07T11:49:52.592Z"
+    },
+    {
+      "id": "a97bff37-3901-461b-aeb8-c119798e26c5",
+      "roomId": "r201",
+      "guestName": "atest",
+      "phone": "2323232323",
+      "checkIn": "2026-11-09",
+      "checkOut": "2026-11-10",
+      "nights": 1,
+      "totalPrice": 4000,
+      "status": "cancelled",
+      "createdAt": "2026-11-07T11:50:36.567Z"
+    },
+    {
+      "id": "2480d34e-cbb6-4132-b409-96501619c8b7",
+      "roomId": "r201",
+      "guestName": "test",
+      "phone": "5665465165",
+      "checkIn": "2026-11-09",
+      "checkOut": "2026-11-10",
+      "nights": 1,
+      "totalPrice": 4000,
+      "status": "cancelled",
+      "createdAt": "2026-11-07T11:51:31.583Z"
+    }
+  ]
+}

@@ -13,10 +13,16 @@ export async function POST(req: Request) {
   try {
     body = await req.json();
   } catch {
-    return NextResponse.json({ error: "Body must be valid JSON" }, { status: 400 });
+    return NextResponse.json(
+      { error: "Body must be valid JSON" },
+      { status: 400 },
+    );
   }
   if (typeof body !== "object" || body === null) {
-    return NextResponse.json({ error: "Body must be a JSON object" }, { status: 400 });
+    return NextResponse.json(
+      { error: "Body must be a JSON object" },
+      { status: 400 },
+    );
   }
   return handle(() => createBooking(body as Record<string, unknown>), 201);
 }

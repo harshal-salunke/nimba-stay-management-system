@@ -11,8 +11,10 @@ export interface FreeRoom extends Room {
 function parseStay(checkIn: unknown, checkOut: unknown) {
   const ci = parseDate(checkIn);
   const co = parseDate(checkOut);
-  if (ci === null) throw new HttpError(400, "checkIn must be a valid date (YYYY-MM-DD)");
-  if (co === null) throw new HttpError(400, "checkOut must be a valid date (YYYY-MM-DD)");
+  if (ci === null)
+    throw new HttpError(400, "checkIn must be a valid date (YYYY-MM-DD)");
+  if (co === null)
+    throw new HttpError(400, "checkOut must be a valid date (YYYY-MM-DD)");
   if (co <= ci) throw new HttpError(400, "Check-out must be after check-in");
   return { ci, co, nights: nightsBetween(ci, co) };
 }
@@ -23,7 +25,12 @@ function parseStay(checkIn: unknown, checkOut: unknown) {
  * on 20 Nov (checkOut = 20) does NOT clash with a guest arriving on 20 Nov.
  * Cancelled bookings are ignored.
  */
-export function hasClash(db: Db, roomId: string, ci: number, co: number): boolean {
+export function hasClash(
+  db: Db,
+  roomId: string,
+  ci: number,
+  co: number,
+): boolean {
   return db.bookings.some((b) => {
     if (b.roomId !== roomId || b.status === "cancelled") return false;
     const bi = parseDate(b.checkIn)!;
@@ -32,10 +39,17 @@ export function hasClash(db: Db, roomId: string, ci: number, co: number): boolea
   });
 }
 
-export function findAvailability(checkIn: unknown, checkOut: unknown, category?: string | null): FreeRoom[] {
+export function findAvailability(
+  checkIn: unknown,
+  checkOut: unknown,
+  category?: string | null,
+): FreeRoom[] {
   const { ci, co, nights } = parseStay(checkIn, checkOut);
   if (category && !CATEGORIES.includes(category as Category)) {
-    throw new HttpError(400, `category must be one of: ${CATEGORIES.join(", ")}`);
+    throw new HttpError(
+      400,
+      `category must be one of: ${CATEGORIES.join(", ")}`,
+    );
   }
   const db = readDb();
   return db.rooms
@@ -55,19 +69,26 @@ export interface BookingInput {
 
 export function createBooking(input: BookingInput): Booking {
   const { ci, co, nights } = parseStay(input.checkIn, input.checkOut);
-  const guestName = typeof input.guestName === "string" ? input.guestName.trim() : "";
+  const guestName =
+    typeof input.guestName === "string" ? input.guestName.trim() : "";
   if (!guestName) throw new HttpError(400, "Guest name is required");
   const phone = typeof input.phone === "string" ? input.phone.trim() : "";
-  if (!/^\d{10}$/.test(phone)) throw new HttpError(400, "Phone must be exactly 10 digits");
-  if (typeof input.roomId !== "string" || !input.roomId) throw new HttpError(400, "roomId is required");
+  if (!/^\d{10}$/.test(phone))
+    throw new HttpError(400, "Phone must be exactly 10 digits");
+  if (typeof input.roomId !== "string" || !input.roomId)
+    throw new HttpError(400, "roomId is required");
   const roomId = input.roomId;
 
   return transaction((db) => {
     const room = db.rooms.find((r) => r.id === roomId);
     if (!room) throw new HttpError(404, "Room not found");
-    if (room.status === "maintenance") throw new HttpError(409, "Room is under maintenance");
+    if (room.status === "maintenance")
+      throw new HttpError(409, "Room is under maintenance");
     if (hasClash(db, roomId, ci, co)) {
-      throw new HttpError(409, "Room is already booked for some of these nights");
+      throw new HttpError(
+        409,
+        "Room is already booked for some of these nights",
+      );
     }
     const booking: Booking = {
       id: randomUUID(),
@@ -90,8 +111,13 @@ export function listBookings() {
   const db = readDb();
   return db.bookings
     .filter((b) => b.status !== "cancelled") // cancelled bookings are hidden from the desk list
-    .map((b) => ({ ...b, roomNumber: db.rooms.find((r) => r.id === b.roomId)?.number ?? "?" }))
-    .sort((a, b) => (a.checkIn < b.checkIn ? -1 : a.checkIn > b.checkIn ? 1 : 0));
+    .map((b) => ({
+      ...b,
+      roomNumber: db.rooms.find((r) => r.id === b.roomId)?.number ?? "?",
+    }))
+    .sort((a, b) =>
+      a.checkIn < b.checkIn ? -1 : a.checkIn > b.checkIn ? 1 : 0,
+    );
 }
 
 export function cancelBooking(id: string): Booking {

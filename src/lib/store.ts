@@ -3,19 +3,69 @@ import path from "path";
 import { Db, Room } from "./types";
 
 function dataFile(): string {
-  return process.env.NIMBA_DATA_FILE || path.join(process.cwd(), "data", "db.json");
+  return (
+    process.env.NIMBA_DATA_FILE || path.join(process.cwd(), "data", "db.json")
+  );
 }
 
 function seedRooms(): Room[] {
   return [
-    { id: "r101", number: "101", category: "Standard", pricePerNight: 2500, status: "available" },
-    { id: "r102", number: "102", category: "Standard", pricePerNight: 2500, status: "available" },
-    { id: "r103", number: "103", category: "Standard", pricePerNight: 2500, status: "maintenance" },
-    { id: "r201", number: "201", category: "Deluxe", pricePerNight: 4000, status: "available" },
-    { id: "r202", number: "202", category: "Deluxe", pricePerNight: 4000, status: "available" },
-    { id: "r203", number: "203", category: "Deluxe", pricePerNight: 4200, status: "available" },
-    { id: "r301", number: "301", category: "Suite", pricePerNight: 6500, status: "available" },
-    { id: "r302", number: "302", category: "Suite", pricePerNight: 7000, status: "available" },
+    {
+      id: "r101",
+      number: "101",
+      category: "Standard",
+      pricePerNight: 2500,
+      status: "available",
+    },
+    {
+      id: "r102",
+      number: "102",
+      category: "Standard",
+      pricePerNight: 2500,
+      status: "available",
+    },
+    {
+      id: "r103",
+      number: "103",
+      category: "Standard",
+      pricePerNight: 2500,
+      status: "maintenance",
+    },
+    {
+      id: "r201",
+      number: "201",
+      category: "Deluxe",
+      pricePerNight: 4000,
+      status: "available",
+    },
+    {
+      id: "r202",
+      number: "202",
+      category: "Deluxe",
+      pricePerNight: 4000,
+      status: "available",
+    },
+    {
+      id: "r203",
+      number: "203",
+      category: "Deluxe",
+      pricePerNight: 4200,
+      status: "available",
+    },
+    {
+      id: "r301",
+      number: "301",
+      category: "Suite",
+      pricePerNight: 6500,
+      status: "available",
+    },
+    {
+      id: "r302",
+      number: "302",
+      category: "Suite",
+      pricePerNight: 7000,
+      status: "available",
+    },
   ];
 }
 
